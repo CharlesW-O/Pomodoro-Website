@@ -1,0 +1,30 @@
+Features Brainstorm:
+    - Timer settings (interval lengths, sounds/alarms, volume, number of focus before long break, auto start next timer or not)
+    - Integrated todo list
+    - Calender intigration (linked w/ google calender?)
+    - Pause, play, and skip forward/back
+    - SHOW TIMER ON TAB NAME
+   X - Schedule feature? Pre-lay out a day of work/breaks?
+   - Music feature? Pause/play lo-fi style music.
+
+Design Brainstorm:
+    - Animation for timer progress
+    - Color/theme settings (array of primary and secondary color options, images, gifs.)
+        - Focus, Short Break, Long Break each with Primary Color, Secondary/Accent Color Options (Must work w/ white text color or figure out how to change that too)
+        - Perhaps even custom uploadable background images/gifs?
+
+To-DO:
+    X - Add pause timer functionality.
+    - Figure out HTML/CSS for pop/pull out windows: 
+        -To-Do 
+        -Calender 
+        X -Settings. 
+    - (Interchangable with next) Connect js functionality to the nav bar windows:
+        - Settings: Three time interval inputs connected to timer. Color change options. Focus interval setter and functionality. Alarm options.
+        - Menu: How to, about page, etc.
+        - Make volume button mute/change volume w/ slider.
+    - (Interchangable with next) Connect js functionality to pull out windows: 
+        - Calender
+        - To - Do
+    - Add skip functionality to the controls below the timer.
+    - Fix breakpoints for smaller screen sizes.

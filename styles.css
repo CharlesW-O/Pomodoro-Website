@@ -1,0 +1,350 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: "Poppins", serif;
+}
+
+.inline {
+    display: inline;
+}
+
+/*Nav Bar*/
+#nav-bar {
+    border-bottom: 3px solid white;
+}
+
+.nav-bar-content {
+    margin: 3px;
+    padding: 3px 3px;
+    display: grid;
+    grid-template-areas: "Logo Buttons" ;
+}
+
+.nav-bar-clickables {
+    text-align: right;
+    grid-area: Buttons;
+}
+
+.nav-bar-logo {
+    grid-area: Logo;
+}
+
+.subtitle {
+    font-size: .9rem;
+}
+
+/* Nav Bar Modals */
+.modal {
+
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  #settings-modal {
+    display: none;
+  }
+
+  #menu-modal {
+    display: none; /* Hidden by default */
+  }
+
+  .modal-content {
+    background-color: #b42e2e;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+
+    p {
+        display: inline;
+    }
+  }
+
+  .close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close-modal:hover,
+.close-modal:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*Main Body*/
+
+#main {
+    /* display: flex;
+    justify-content: space-between;
+    align-items: start; */
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas: "Calender Timer ToDo";
+    margin: 3px;
+}
+
+#calender {
+    text-align: left;
+    grid-area: Calender;
+    /* flex-basis: 25%; */
+}
+
+#whole-timer {
+    text-align: center;
+    grid-area: Timer;
+    /* flex-basis: 50%; */
+}
+
+#to-do {
+    text-align: right;
+    grid-area: ToDo;
+    /* flex-basis: 25%; */
+}
+
+/*Below Timer (Controls, etc)*/
+
+.current-zone {
+    background: white;
+    border-radius: 50px;
+    display: inline-block;
+}
+
+.zone-tag {
+    font-size: 4rem;
+    font-weight: 600;
+    padding: 0 1rem;
+}
+
+.till-long-break {
+    background: white;
+    margin: 1rem 0;
+    border-radius: 100%;
+    display: inline-block;
+}
+
+.till-long-break p {
+    font-size: 2rem;
+    padding: 0 2rem;
+}
+
+/* SVG Sizing + Positioning */
+.pause-play-btns {
+    width: 8rem;
+    height: 8rem;
+    vertical-align: bottom;
+    cursor: pointer;
+    
+}
+
+#start-stop-btn {
+    width: 8rem;
+    height: 8rem;
+    vertical-align: bottom;
+    cursor: pointer;
+    
+}
+
+.menu-chevron {
+    color: white;
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.control-chevron {
+    width: 3rem;
+    height: 3rem;
+    vertical-align: text-bottom;
+    cursor: pointer;
+}
+
+.nav-svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    vertical-align: text-bottom;
+    cursor: pointer;
+}
+
+/* Progress Bar/Time CSS*/
+
+/* Timer Itself*/
+
+.base-timer {
+    margin: 0 auto;
+    position: relative;
+    height: 50%;
+    width: 50%;
+}
+
+.base-timer__circle { /* Removes SVG styling that hides the time label */
+    fill: none;
+    stroke: none;
+}
+
+.base-timer__path-elapsed { /*SVG path displaying timer's progress*/
+    stroke-width: 7px;
+    stroke: #b42e2e;
+}
+
+.base-timer__label {
+    position: absolute;
+
+    /* Size matches parent container */
+    height: 100%;
+    width: 100%;
+
+    /* Keep label aligned to top */
+    top: 0;
+
+    /* Create flex box centering content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Font Size - adjust as needed */
+    font-size: 7.5rem;
+}
+
+.play-pause-btn {
+
+    /* Size matches parent container */
+    height: 150%;
+    width: 100%;
+
+}
+
+.base-timer__path-remaining {
+
+    /* Same thickness as original ring */
+    stroke-width: 7px;
+
+    /* Rounds line ends to create a seamless circle */
+    stroke-linecap: round;
+
+    /* Starts animation at top of circle */
+    transform: rotate(90deg);
+    transform-origin: center;
+
+    /* One second aligns with timer speed */
+    transition: 1s linear all;
+
+    /* Allows ring to change color when the color value updates */
+    stroke: currentColor;
+}
+
+.base-timer__svg {
+
+    /* Flips the SVG and makes animation go left-to-right */
+    transform: scaleX(-1);
+}
+
+/* Timer Colors */
+
+.white {
+    color: white;
+}
+
+/* Inputs */
+
+.inputs {
+
+    .btn {
+        border: none;
+        color: white;
+        background-color: #333;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 18px;
+        padding: 11px 20px;
+        margin: 4px 2px;
+        cursor: pointer;
+
+        transition: all 0.3s ease-in-out;
+        &:hover {
+            background-color: gray;
+        }
+        &:active {
+            background-color: rgb(66, 66, 66);
+        }
+    }
+        
+    #time-input {
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid lightgray;
+            padding: 5px;
+            font-size: 18px;
+        }
+}
+
+/* .progress-bar:not([role="progressbar"]) {
+    color: black;
+}
+
+[role="progressbar"] span {
+    display: none;
+}
+
+[role="progressbar"] {
+    width: 50%;
+    aspect-ratio: 1 / 1;
+    font-size: 8rem;
+    background: conic-gradient(
+        #b42e2e var(--progress, 0),
+        white 0%
+    );
+    margin: 2rem auto;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+}
+
+[role="progressbar"]::after {
+    content: attr(aria-valuenow);
+    
+    background: #ff5757;
+    border-radius: inherit;
+    width: calc(100% - 10%);
+    aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+} */
+
+/* Color/Background Tags Follow */
+
+.focus-color {
+    color: #ff5757;
+}
+
+.focus-color-bg {
+    background-color: #ff5757;
+}
+
+.short-color {
+    color: #5271FF;
+}
+
+.short-color-bg {
+    background-color: #5271FF;
+}
+
+.long-color {
+    color: #747a99;
+}
+
+.long-color-bg {
+    background-color: #747a99;
+}
