@@ -14,6 +14,14 @@
 //     progressBar.attr('--progress', progress + "%");
 // }
 
+// Used to change timer depending on focus, short or long break.
+var focusInput = document.getElementById("focus-input");
+var shortBreakInput = document.getElementById("short-break-input"); //Not connected to anything yet
+var longBreakInput = document.getElementById("long-break-input"); //Not connected to anything yet
+
+//Used to track and alternate intervals of focus and breaks.
+var currentTimerType = "focus";
+
 
 // Initial value of 20 seconds CHANGE THIS TO CHANGE TIMER LENGTH
 let TIME_LIMIT = 0;
@@ -71,6 +79,8 @@ document.querySelector("#timer").innerHTML = `
 // Starts the timer when called
 function startTimer() { 
 
+    TIME_LIMIT = focusInput.value;
+
     if (!timerInterval) {
 
         timerInterval = setInterval(() => {
@@ -111,20 +121,50 @@ function onTimesUp() {
     tillLongBreak();
 }
 
+// Start/pause timer when button hit
+window.addEventListener("load", () => {
+    const startStopBtn = document.getElementById("start-stop-btn");
+    
+    // focusInput.onchange = () => { //Make work for all 3 inputs. Change TIME_LIMIT to be FOCUS_TIME_LIMIT etc. maybe?
+    //     TIME_LIMIT = focusInput.value; // *60 it
+    //     focusInput.value = "";
+    // };
+
+    startStopBtn.addEventListener("click", () => {
+
+        if (startStopBtn.getAttribute("src") === "./images/play-fill.svg") {
+
+            startTimer();
+
+            startStopBtn.setAttribute("src", "./images/pause-fill.svg");
+
+        } else {
+
+            pauseTimer();
+
+            startStopBtn.setAttribute("src", "./images/play-fill.svg");
+        }
+
+    });
+})
+
 // Ticks up focus interval aka till-long-break counter + sends to correct break
 function tillLongBreak() {
     const intervalFullCount = document.getElementById("focus-interval").value;
 
-    intervalCurrentCount++;
-    
-
-    if (intervalCurrentCount <= intervalFullCount) {
-        alert("Sent to short break");
-        // sends to short break function
+    if (currentTimerType == "focus") {
+        intervalCurrentCount++;
+        if (intervalCurrentCount <= intervalFullCount) {
+            currentTimerType = "shortBreak";
+            alert("Sent to short Break");
+        } else {
+            intervalCurrentCount = 1;
+            currentTimerType = "longBreak";
+            alert("Sent to long break");
+        }
     } else {
-        intervalCurrentCount = 1;
-        alert("Sent to long break");
-        //sends to long break function
+        currentTimerType = "focus";
+        alert("Sent to focus")
     }
 
     focusIntervalText.textContent = intervalCurrentCount + "/" + intervalFullCount;
@@ -159,42 +199,6 @@ function setCircleDasharray() {
       .getElementById("base-timer-path-remaining")
       .setAttribute("stroke-dasharray", circleDasharray);
   }
-
-// Start/pause timer when button hit
-window.addEventListener("load", () => {
-    const startStopBtn = document.getElementById("start-stop-btn");
-    const focusInput = document.getElementById("focus-input");
-    const shortBreakInput = document.getElementById("short-break-input"); //Not connected to anything yet
-    const longBreakInput = document.getElementById("long-break-input"); //Not connected to anything yet
-    
-    // focusInput.onchange = () => { //Make work for all 3 inputs. Change TIME_LIMIT to be FOCUS_TIME_LIMIT etc. maybe?
-    //     TIME_LIMIT = focusInput.value; // *60 it
-    //     focusInput.value = "";
-    // };
-
-    startStopBtn.addEventListener("click", () => {
-
-        if (startStopBtn.getAttribute("src") === "./images/play-fill.svg") {
-
-            TIME_LIMIT = focusInput.value;
-
-            TIME_LIMIT === 0 ? alert("Enter time first") : startTimer();
-
-            startStopBtn.setAttribute("src", "./images/pause-fill.svg");
-
-        } else {
-
-            pauseTimer();
-
-            startStopBtn.setAttribute("src", "./images/play-fill.svg");
-        }
-
-    });
-})
-
-
-
-
  
 // Play Audio Function MESSED UP AND SLOW FIGURE OUT LATER or just find a better alarm sound honestly. Prob that tbh.
 
