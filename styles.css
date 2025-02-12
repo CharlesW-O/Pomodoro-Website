@@ -195,7 +195,18 @@ body {
 
 .base-timer__path-elapsed { /*SVG path displaying timer's progress*/
     stroke-width: 7px;
+}
+
+.elapsed-color-focus {
     stroke: #b42e2e;
+}
+
+.elapsed-color-short {
+    stroke:#2644cc;
+}
+
+.elapsed-color-long {
+    stroke: #464a5e;
 }
 
 .base-timer__label {

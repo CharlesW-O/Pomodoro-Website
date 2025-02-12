@@ -1,18 +1,3 @@
-// const progressBar = $(".progress-bar");
-// let progress = 0;
-
-// function enableProgressBar() {
-//     progressBar.attr("role", "progressbar");
-//     progressBar.attr("aria-valuenow", 0);
-//     progressBar.attr("aria-live", "polite");
-// }
-
-// enableProgressBar();
-
-// function updateTimer(progress) {
-//     progressBar.attr("aria-valuenow", progress);
-//     progressBar.attr('--progress', progress + "%");
-// }
 
 // Used to change timer depending on focus, short or long break.
 var focusInput = document.getElementById("focus-input");
@@ -24,7 +9,7 @@ var currentTimerType = "focus";
 
 
 // Initial value of 20 seconds CHANGE THIS TO CHANGE TIMER LENGTH
-let TIME_LIMIT = 0;
+let TIME_LIMIT = focusInput.value * 60;
 
 //For animating the progress bar
 const FULL_DASH_ARRAY = 283;
@@ -36,9 +21,12 @@ let timeLeft = TIME_LIMIT;
 // Keep reference of interval object to clear when needed
 let timerInterval = null;
 
-// Variables that enable focus intervals/till-loong-break functionality
+// Variables that enable focus intervals/till-long-break functionality
 let intervalCurrentCount = 1
 let focusIntervalText = document.getElementById("focus-interval-text");
+
+// Targets the timer label, telling you what "zone" you are in (focus, break).
+const zoneTagText = document.querySelector(".zone-tag");
 
 // Color for the remaining time path (the path on top)
 // const COLOR_CODES = {
@@ -55,7 +43,7 @@ document.querySelector("#timer").innerHTML = `
         <div class="base-timer">
             <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <g class="base-timer__circle">
-                    <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45" />
+                    <circle class="base-timer__path-elapsed elapsed-color-focus" cx="50" cy="50" r="45" />
                     <path
                         id="base-timer-path-remaining"
                         stroke-dasharray="283"
@@ -79,7 +67,21 @@ document.querySelector("#timer").innerHTML = `
 // Starts the timer when called
 function startTimer() { 
 
-    TIME_LIMIT = focusInput.value;
+    switch(currentTimerType) {
+        case "focus":
+            TIME_LIMIT = focusInput.value * 60;
+        break;
+
+        case "shortBreak":
+            TIME_LIMIT = shortBreakInput.value * 60;
+        break;
+
+        case "longBreak":
+            TIME_LIMIT = longBreakInput.value * 60;
+        break;
+
+        default: TIME_LIMIT = 25 * 60;
+    }
 
     if (!timerInterval) {
 
@@ -112,23 +114,21 @@ function pauseTimer() {
 
 // Resets timer on end
 function onTimesUp() {
+
     clearInterval(timerInterval);
     timerInterval = null;
     timePassed = 0;
-    TIME_LIMIT = 0;
+    // TIME_LIMIT = 0;
     document.getElementById("start-stop-btn").setAttribute("src", "./images/play-fill.svg");
     playAlarm();
     tillLongBreak();
+    timerLabelReset();
+    
 }
 
 // Start/pause timer when button hit
 window.addEventListener("load", () => {
     const startStopBtn = document.getElementById("start-stop-btn");
-    
-    // focusInput.onchange = () => { //Make work for all 3 inputs. Change TIME_LIMIT to be FOCUS_TIME_LIMIT etc. maybe?
-    //     TIME_LIMIT = focusInput.value; // *60 it
-    //     focusInput.value = "";
-    // };
 
     startStopBtn.addEventListener("click", () => {
 
@@ -153,23 +153,103 @@ function tillLongBreak() {
     const intervalFullCount = document.getElementById("focus-interval").value;
 
     if (currentTimerType == "focus") {
+
         intervalCurrentCount++;
+
         if (intervalCurrentCount <= intervalFullCount) {
+
             currentTimerType = "shortBreak";
-            alert("Sent to short Break");
+            TIME_LIMIT = shortBreakInput.value * 60;
+            zoneTagText.innerText = "Short Break";
+            changeZoneColor();
+            // alert("Sent to short Break");
+
         } else {
+
             intervalCurrentCount = 1;
             currentTimerType = "longBreak";
-            alert("Sent to long break");
+            TIME_LIMIT = longBreakInput.value * 60;
+            zoneTagText.innerText = "Long Break";
+            changeZoneColor();
+            // alert("Sent to long break");
         }
+
     } else {
+
         currentTimerType = "focus";
-        alert("Sent to focus")
+        TIME_LIMIT = focusInput.value * 60;
+        zoneTagText.innerText = "Focus";
+        changeZoneColor();
+        // alert("Sent to focus");
     }
 
     focusIntervalText.textContent = intervalCurrentCount + "/" + intervalFullCount;
 }
 
+// Function that facilitates color change as timer "zones" roll over.
+
+function changeZoneColor() {
+const targetBody = document.body;
+const targetZoneTag = document.querySelector(".zone-tag");
+const targetElapsedTime = document.querySelector(".base-timer__path-elapsed");
+const targetLeftControlChevron = document.querySelectorAll(".control-chevron")[0];
+const targetRightControlChevron = document.querySelectorAll(".control-chevron")[1];
+
+switch (currentTimerType) {
+    case "focus": 
+        targetBody.classList.remove("short-color-bg");
+        targetBody.classList.remove("long-color-bg");
+        targetBody.classList.add("focus-color-bg");
+
+        targetZoneTag.classList.remove("short-color");
+        targetZoneTag.classList.remove("long-color");
+        targetZoneTag.classList.add("focus-color");
+
+        targetElapsedTime.classList.remove("elapsed-color-short");
+        targetElapsedTime.classList.remove("elapsed-color-long");
+        targetElapsedTime.classList.add("elapsed-color-focus");
+
+        targetLeftControlChevron.classList.remove("focus-color");
+        targetRightControlChevron.classList.remove("focus-color");
+        targetLeftControlChevron.classList.add("short-color");
+        targetRightControlChevron.classList.add("short-color");
+    break;
+
+    case "shortBreak":
+        targetBody.classList.remove("focus-color-bg");
+        targetBody.classList.add("short-color-bg");
+
+        targetZoneTag.classList.remove("focus-color");
+        targetZoneTag.classList.add("short-color");
+
+        targetElapsedTime.classList.remove("elapsed-color-focus");
+        targetElapsedTime.classList.add("elapsed-color-short");
+
+        targetLeftControlChevron.classList.remove("short-color");
+        targetRightControlChevron.classList.remove("short-color");
+        targetLeftControlChevron.classList.add("focus-color");
+        targetRightControlChevron.classList.add("focus-color");
+    break;
+
+    case "longBreak":
+        targetBody.classList.remove("focus-color-bg");
+        targetBody.classList.add("long-color-bg");
+
+        targetZoneTag.classList.remove("focus-color");
+        targetZoneTag.classList.add("long-color");
+
+        targetElapsedTime.classList.remove("elapsed-color-focus");
+        targetElapsedTime.classList.add("elapsed-color-long");
+
+        targetLeftControlChevron.classList.remove("short-color");
+        targetRightControlChevron.classList.remove("short-color");
+        targetLeftControlChevron.classList.add("focus-color");
+        targetRightControlChevron.classList.add("focus-color");
+    break;
+
+    default: console.log(currentTimerType);
+}
+}
 
 // Formats the time left lable correctly
 function formatTimeLeft(time) {
@@ -182,6 +262,11 @@ function formatTimeLeft(time) {
     }
 
     return `${minutes}:${seconds}`; //Output in MM:SS 
+}
+
+// Sets timer's display/label of time after switching to next "zone".
+function timerLabelReset() {
+    document.getElementById("base-timer-label").innerText = formatTimeLeft(TIME_LIMIT);
 }
 
 // Divides time left by the defined time limit.

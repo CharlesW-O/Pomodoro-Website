@@ -17,14 +17,14 @@ To-DO:
     X - Add pause timer functionality.
     - Figure out HTML/CSS for pop/pull out windows: 
         -To-Do 
-        -Calender 
+        -Calender (Change to be music w/ spotify integration???)
         X -Settings. 
     - (Interchangable with next) Connect js functionality to the nav bar windows:
-        - Settings: Three time interval inputs connected to timer. Color change options. Focus interval setter and functionality. Alarm options.
+        - Settings: X Three time interval inputs connected to timer. Color change options. X Focus interval setter and functionality. Alarm options.
         - Menu: How to, about page, etc.
         - Make volume button mute/change volume w/ slider.
     - (Interchangable with next) Connect js functionality to pull out windows: 
-        - Calender
+        - Calender (or music?)
         - To - Do
     - Add skip functionality to the controls below the timer.
     - Fix breakpoints for smaller screen sizes.
