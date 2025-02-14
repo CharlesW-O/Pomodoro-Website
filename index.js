@@ -120,7 +120,7 @@ function onTimesUp() {
     timePassed = 0;
     // TIME_LIMIT = 0;
     document.getElementById("start-stop-btn").setAttribute("src", "./images/play-fill.svg");
-    playAlarm();
+    playAlarm(alarmChoice);
     tillLongBreak();
     timerLabelReset();
     
@@ -285,27 +285,29 @@ function setCircleDasharray() {
       .setAttribute("stroke-dasharray", circleDasharray);
   }
  
-// Play Audio Function MESSED UP AND SLOW FIGURE OUT LATER or just find a better alarm sound honestly. Prob that tbh.
+// Timer Settings Form (Alarms, time intervals, etc.)
+let timerSettings = document.forms["timer-settings"];
+let alarmChoice = timerSettings.alarmSound;
+let alarmOptions = timerSettings.alarmSound.options;
 
-function playAudio(audio, numberOfTimes = 1, delay = 3000, firstTime = true ){
-    if(firstTime){
-       audio.play();
-    }
-    setTimeout( () => {
-       if(!firstTime){
-           audio.play();
-       }
-       numberOfTimes--;
-       if(numberOfTimes > 0){
-         playAudio(audio,numberOfTimes,delay, false);
-       }
-    }, delay)
-  }
+// focusInput.onchange = function() {
+//     TIME_LIMIT = this.value;
+//     formatTimeLeft(timeLeft);
+// }
+//Figure above out. Seems like way to solve initial display not working. Pos need to do the .forms[] array thing?
 
-  function playAlarm() {
-    var audio = new Audio("./sounds/chime-sound-7143.mp3");
-    audio.volume = 1;
-        playAudio(audio,3,2000);
+alarmChoice.onchange = function() {
+    let optionValue = this.value;
+    var alarm = new Audio("./sounds/" + optionValue + ".mp3" )
+    alarm.volume = 1;
+    alarm.play();
+}
+
+function playAlarm() {
+    let chosenAlarm = alarmChoice.value;
+    var alarm = new Audio("./sounds/" + chosenAlarm + ".mp3" )
+    alarm.volume = 1;
+    alarm.play();
     }
 
 

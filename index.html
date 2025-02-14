@@ -56,19 +56,26 @@
       <span class="close-modal">&times;</span>
       <h2>Timer Settings</h2>
       <hr />
-      <p>Focus Length:</p>
-      <input type="number" placeholder="Minutes" id="focus-input" class="inputs" value="25" />
-      <p>Short Break Length:</p>
-      <input type="number" placeholder="Minutes" id="short-break-input" class="inputs" value="5" />
-      <p>Long Break Length:</p>
-      <input type="number" placeholder="Minutes" id="long-break-input" class="inputs" value="15" />
-      <p>Focus Interval:</p>
-      <input type="number" placeholder="Times Untill Long Break" id="focus-interval" class="inputs" value="3" />
-      <label for="alarm-sound">Alarm Sound</label>
-      <select name="alarm-sound" id="alarm-sound">
-        <option value="Alarm-1">Alarm 1</option>
-        <option value="Alarm-2">Alarm 2</option>
-      </select>
+      <form name="timer-settings" action="">
+        <p>Focus Length:</p>
+        <input type="number" placeholder="Minutes" id="focus-input" class="inputs" value="25" />
+        <p>Short Break Length:</p>
+        <input type="number" placeholder="Minutes" id="short-break-input" class="inputs" value="5" />
+        <p>Long Break Length:</p>
+        <input type="number" placeholder="Minutes" id="long-break-input" class="inputs" value="15" />
+        <p>Focus Interval:</p>
+        <input type="number" placeholder="Times Untill Long Break" id="focus-interval" class="inputs" value="3" />
+        <label for="alarm-sound">Alarm Sound</label>
+        <select name="alarmSound" id="alarm-sound">
+          <option value="Single Chime">Single Chime</option>
+          <option value="Notification Chime">Notification Chime</option>
+          <option value="Bell">Bell</option>
+          <option value="Digital Beeping">Digital Beeping</option>
+          <option value="Fast Digital Beeping">Fast Digital Beeping</option>
+          <option value="Woop Woop">Woop Woop</option>
+          <option value="Metal Pipe (LOUD)">Metal Pipe (LOUD)</option>
+        </select>
+      </form>
       <hr />
       <h2>Display Settings</h2>
       <hr />

@@ -28,3 +28,4 @@ To-DO:
         - To - Do
     - Add skip functionality to the controls below the timer.
     - Fix breakpoints for smaller screen sizes.
+    -Fix timer not working when on another tab (smth to do with the interval timer I think?).
