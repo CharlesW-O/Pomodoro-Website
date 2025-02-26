@@ -62,7 +62,7 @@ document.querySelector("#timer").innerHTML = `
             </span>
             <span class="base-timer__label play-pause-btn"><img id="start-stop-btn" src="./images/play-fill.svg"></span>
         </div>
-`;
+`; 
 
 // Starts the timer when called
 function startTimer() { 
@@ -93,6 +93,9 @@ function startTimer() {
 
             // Time left label updates
             document.getElementById("base-timer-label").innerHTML = formatTimeLeft(timeLeft);
+
+            //Updating Tab Title w/ Timer
+            document.querySelector("#tab-title").textContent = "MiniDoro - " + formatTimeLeft(timeLeft);
 
             //Updates path each second
             setCircleDasharray();

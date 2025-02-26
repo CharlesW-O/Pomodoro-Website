@@ -14,6 +14,16 @@ Design Brainstorm:
         - Perhaps even custom uploadable background images/gifs?
 
 To-DO:
+
+    To get it working base level:
+    (Fixed by doing the below? Check github link to make sure)- Fix timer pausing on alt tab.
+    X - Add timer to tab title
+    (Temp fixed)- Fix breakpoints 
+    - Add to-do list
+
+
+
+    General:
     X - Add pause timer functionality.
     - Figure out HTML/CSS for pop/pull out windows: 
         -To-Do 

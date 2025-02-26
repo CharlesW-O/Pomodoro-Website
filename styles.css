@@ -184,8 +184,8 @@ body {
 .base-timer {
     margin: 0 auto;
     position: relative;
-    height: 50%;
-    width: 50%;
+    height: 50vh;
+    width: 50vh;
 }
 
 .base-timer__circle { /* Removes SVG styling that hides the time label */
