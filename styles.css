@@ -85,9 +85,6 @@ body {
 /*Main Body*/
 
 #main {
-    /* display: flex;
-    justify-content: space-between;
-    align-items: start; */
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-areas: "Calender Timer ToDo";
@@ -97,19 +94,43 @@ body {
 #calender {
     text-align: left;
     grid-area: Calender;
-    /* flex-basis: 25%; */
+    
 }
 
 #whole-timer {
     text-align: center;
     grid-area: Timer;
-    /* flex-basis: 50%; */
+    
 }
 
 #to-do {
     text-align: right;
     grid-area: ToDo;
-    /* flex-basis: 25%; */
+    
+}
+
+/* Sidebar (Animations, pull out, etc) */
+#open-to-do-txt {
+    display: none;
+}
+
+#to-do:hover {
+
+    #open-to-do-txt {
+        display: inline;
+        /* animation: 3s infinite alternate slide-in; */
+    }
+}
+
+#open-calender-txt {
+    display: none;
+}
+
+#calender:hover {
+
+    #open-calender-txt {
+        display: inline;
+    }
 }
 
 /*Below Timer (Controls, etc)*/

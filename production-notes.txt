@@ -16,7 +16,7 @@ Design Brainstorm:
 To-DO:
 
     To get it working base level:
-    (Fixed by doing the below? Check github link to make sure)- Fix timer pausing on alt tab.
+    - Fix timer pausing on alt tab. currently slows down marginally and so timer is off.
     X - Add timer to tab title
     (Temp fixed)- Fix breakpoints 
     - Add to-do list
